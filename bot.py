@@ -16,7 +16,7 @@ async def on_ready():
     print('>>>>> 此項目由機車製作，使用請標註來源，感謝尊重 <<<<<')
     print('>>>>> 有任何問題請至 https://discord.gg/ouou <<<<<')
 
-@bot.command(description='給予用戶錢錢',guild_ids=[GUILD])
+@bot.slash_command(description='給予用戶錢錢',guild_ids=[GUILD])
 async def help(ctx):
     with open('help.txt','r',encoding='utf-8') as file:
         data=file.read()
@@ -24,7 +24,7 @@ async def help(ctx):
     await ctx.respond(embed=embed)
 
 
-@bot.command(description='給予用戶錢錢',guild_ids=[GUILD])
+@bot.slash_command(description='給予用戶錢錢',guild_ids=[GUILD])
 async def mset(ctx,
         user:Option(discord.User,"要給的用戶"),count:Option(int,"要給的錢數")):
     if ctx.author.id == OWNER:
@@ -45,7 +45,7 @@ async def mset(ctx,
     else:
         await ctx.respond(f'只有<@{OWNER}>可以用喔~',allowed_mentions=discord.AllowedMentions(users=False))
 
-@bot.command(description='查看你目前的錢數',guild_ids=[GUILD])
+@bot.slash_command(description='查看你目前的錢數',guild_ids=[GUILD])
 async def money(ctx):
     jfile=f'money/{ctx.author.id}.json'
     if os.path.isfile(jfile):
@@ -60,7 +60,7 @@ async def money(ctx):
             json.dump(data,file)
         await ctx.respond('您還沒有錢包，所以我幫您創了一個')
 
-@bot.command(description='工作賺錢錢',guild_ids=[GUILD])
+@bot.slash_command(description='工作賺錢錢',guild_ids=[GUILD])
 @commands.cooldown(1,3600,commands.BucketType.user)
 async def work(ctx):
     count=random.randint(0,100)
@@ -83,7 +83,7 @@ async def work(ctx):
             json.dump(data,file)
         await ctx.respond(f'您還沒有錢包，所以我幫您創了一個,並獲得了工資{count}元')
 
-@bot.command(description='賭博?',guild_ids=[GUILD])
+@bot.slash_command(description='賭博?',guild_ids=[GUILD])
 async def bet(ctx,count:Option(int,"要購買的數量(一個100)")):
     jfile= f"money/{ctx.author.id}.json"
     if os.path.isfile(jfile):
