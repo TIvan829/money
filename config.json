@@ -1,0 +1,9 @@
+{
+    "//":"// 是備註",
+
+    "token":"" , "//token":"Discord Bot's token",
+
+    "owner":0 , "//owner":"擁有者ID",
+
+    "guild":0 , "//guild":"群組ID"
+}

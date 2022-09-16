@@ -1,0 +1,9 @@
+Money Bot
+
+> /money | 查看您的錢包
+> /work | 每小時工作一次
+> /bet [數量] | 賭博(有賺有虧)
+
+> /mset [user] [count] | 給玩家錢錢(擁有者限定)
+
+[使用此開源修改製作](https://github.com/TIvan829/money)
