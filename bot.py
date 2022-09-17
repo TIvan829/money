@@ -2,7 +2,7 @@ import discord,json,os,random
 from discord.ext import commands
 from discord.commands import Option
 
-bot = commands.Bot()
+bot = commands.Bot(help_command=None)
 
 with open('config.json','r',encoding='utf-8') as file:
     data=json.load(file)
