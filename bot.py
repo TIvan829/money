@@ -10,11 +10,13 @@ TOKEN=data["token"]
 OWNER=data["owner"]
 GUILD=data["guild"]
 
+
 @bot.event
 async def on_ready(): 
     print(f'>>{bot.user}上線<<')
     print('>>>>> 此項目由機車製作，使用請標註來源，感謝尊重 <<<<<')
     print('>>>>> 有任何問題請至 https://discord.gg/ouou <<<<<')
+
 
 @bot.slash_command(description='給予用戶錢錢',guild_ids=[GUILD])
 async def help(ctx):
@@ -45,20 +47,24 @@ async def mset(ctx,
     else:
         await ctx.respond(f'只有<@{OWNER}>可以用喔~',allowed_mentions=discord.AllowedMentions(users=False))
 
+
 @bot.slash_command(description='查看你目前的錢數',guild_ids=[GUILD])
 async def money(ctx):
+
     jfile=f'money/{ctx.author.id}.json'
     if os.path.isfile(jfile):
-        with open(jfile,'r') as file:
-            data=json.load(file)
-        money=data["money"]
-        embed=discord.Embed(title="您的錢包", description=f"您目前有【{money}】元",color=discord.Colour.random())
-        await ctx.respond(embed=embed)
+        pass
     else:
         with open(jfile,'w') as file:
             data={"money":0}
             json.dump(data,file)
-        await ctx.respond('您還沒有錢包，所以我幫您創了一個')
+
+    with open(jfile,'r') as file:
+        data=json.load(file)
+    money=data["money"]
+    embed=discord.Embed(title="您的錢包", description=f"您目前有【{money}】元",color=discord.Colour.random())
+    await ctx.respond(embed=embed)
+
 
 @bot.slash_command(description='工作賺錢錢',guild_ids=[GUILD])
 @commands.cooldown(1,3600,commands.BucketType.user)
@@ -87,29 +93,30 @@ async def work(ctx):
 async def bet(ctx,count:Option(int,"要購買的數量(一個100)")):
     jfile= f"money/{ctx.author.id}.json"
     if os.path.isfile(jfile):
-        with open(jfile,'r') as file:
-            data=json.load(file)
-        l=data["money"]
-        if l < count*100-1:
-            await ctx.respond(f'你的錢不夠吶')
-        if l > count*100-1:
-            for r in range(count):
-                with open(jfile,'r') as file:
-                    data=json.load(file)
-                l=data["money"]
-                m=random.randint(0,200)
-                data["money"]=l-100+m
-                with open(jfile,'w') as file:
-                    json.dump(data,file)
-                with open(jfile,'r') as file:
-                    data=json.load(file)
-                m=data["money"]
-                embed=discord.Embed(title="刮刮樂", description=f"你買了{count}張刮刮樂\n你原本有{l}元 | 現在有{m}元!",color=discord.Colour.random())
-                await ctx.respond(embed=embed)
+        pass
     else:
         with open(jfile,'w') as file:
             data={"money":0}
             json.dump(data,file)
-        await ctx.respond('您還沒有錢包，所以我幫您創了一個')
+    
+    with open(jfile,'r') as file:
+        data=json.load(file)
+    l=data["money"]
+    if l < count*100-1:
+        await ctx.respond(f'你的錢不夠吶')
+    if l > count*100-1:
+        for r in range(count):
+            with open(jfile,'r') as file:
+                data=json.load(file)
+            l=data["money"]
+            m=random.randint(0,200)
+            data["money"]=l-100+m
+            with open(jfile,'w') as file:
+                json.dump(data,file)
+            with open(jfile,'r') as file:
+                data=json.load(file)
+            m=data["money"]
+            embed=discord.Embed(title="刮刮樂", description=f"你買了{count}張刮刮樂\n你原本有{l}元 | 現在有{m}元!",color=discord.Colour.random())
+            await ctx.respond(embed=embed)
 
 bot.run(TOKEN)
