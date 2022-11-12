@@ -5,4 +5,4 @@
 ![cc](https://i.imgur.com/dkd1Jtz_d.webp)
 ***
 以下是我的資訊<br>
-[Discord 群](https://discord.gg/ouou) | [Youtube](https://bit.ly/Ivan_YT) | [Github](https://github.com/TIvan829)
+[Discord 群](https://discord.gg/KQufgaCxAM) | [Youtube](https://bit.ly/Ivan_YT) | [Github](https://github.com/TIvan829)
